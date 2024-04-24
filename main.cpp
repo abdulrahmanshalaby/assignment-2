@@ -73,13 +73,20 @@ bool removeplayer(string n){
             active[j]=false;
             flag=true;
         }
-        if(flag)
-            return true;
-        return false;
+
     }
+    if(flag)
+        return true;
+    return false;
 }
 };
 int NationalTeam::i=0;
 int main() {
+Player a("ahmed",22,180,22,"egyptian");
+    Player b("ahmed",22,180,22,"egyptian");
+    NationalTeam ahly;
+    ahly.addPlayer(a);
+    ahly.addPlayer(b);
+    ahly.removeplayer("ahmed");
 
 }
