@@ -204,16 +204,7 @@ ostream& operator <<(ostream&os,NationalTeam& obj){
     return os;
 }
 int main() {
-Player a("ahmed",2004,180,22,"egyptian");
-    Player b("ahme",2005,180,22,"egyptian");
-    Player c("ramy",2005,180,22,"egyptian");
 
-    NationalTeam ahly("egypt");
-    ahly.addPlayer(a);
-    ahly.addPlayer(b);
-    ahly.addPlayer(c);
-ofstream out("out.txt");
-ahly.writeStatistics(out);
 
 
 }
