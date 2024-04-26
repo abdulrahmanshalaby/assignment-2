@@ -11,9 +11,9 @@ class Player{
     string nationality;
 public:
 
-    Player(string name="",int year=0,int h=0,int ig=0,string nationality=""){
+    Player(string name="",int yearofbirth=0,int h=0,int ig=0,string nationality=""){
         this->name=name;
-        year_of_birth=year;
+        year_of_birth=yearofbirth;
         height=h;
         int_goals=ig;
         this->nationality=nationality;
@@ -89,7 +89,7 @@ bool removeplayer(string n){
 int getNumOfPlayers(){
     int i=0;
     for (int j = 0; j < 18; ++j) {
-        if(active[j]==true)
+        if(active[j])
             i++;
     }
     return i;
@@ -98,7 +98,7 @@ int AvgHeight(){
     int i=0;
     int k=0;
     for (int j = 0; j < 18; ++j) {
-        if (active[j] == true) {
+        if (active[j]) {
             i++;
         }
     }
@@ -115,7 +115,7 @@ Player OldestPlayer(){
     int k=0;
     long long oldest=57857824758;
     for (int j = 0; j < 18; ++j) {
-        if(active[j]== true){
+        if(active[j]){
         if(players[j].get_yearofbirth()<oldest) {
             oldest = players[j].get_yearofbirth();
             k = j;
@@ -129,7 +129,7 @@ Player YoungestPlayer(){
         int k=0;
         int oldest=0;
         for (int j = 0; j < 18; ++j) {
-            if(active[j]== true){
+            if(active[j]){
                 if(players[j].get_yearofbirth()>oldest) {
                     oldest = players[j].get_yearofbirth();
                     k = j;
@@ -139,12 +139,11 @@ Player YoungestPlayer(){
         }
         return players[k];
     }
-
 Player HighestIntGoals(){
     int k=0;
     int Hgoals=0;
     for (int j = 0; j < 18; ++j) {
-        if(active[j]== true){
+        if(active[j]){
             if(players[j].get_intgoals()>Hgoals) {
                 Hgoals = players[j].get_intgoals();
                 k = j;
@@ -159,24 +158,23 @@ Player HighestIntGoals(){
         ofs << "Team Country: " << country << endl;
         ofs << "Number of players: " << getNumOfPlayers() << endl;
         ofs << "Average height of players: " << AvgHeight() << endl;
-
         Player oldest = OldestPlayer();
-        ofs << "Name and age of oldest player: " << oldest.get_name() << " (" << (2024 - oldest.get_yearofbirth()) << " years old)" << endl;
+        ofs << "oldest player: " << oldest.get_name() << "           Age: " << (2024 - oldest.get_yearofbirth()) << endl;
 
         Player youngest = YoungestPlayer();
-        ofs << "Name and age of youngest player: " << youngest.get_name() << " (" << (2024 - youngest.get_yearofbirth()) << " years old)" << endl;
+        ofs << "youngest player: " << youngest.get_name() << "       Age: " << (2024 - youngest.get_yearofbirth()) << endl;
 
         ofs << "Average number of international goals of players: " << AvgIntGoals() << endl;
 
         Player highestGoals =HighestIntGoals() ;
-        ofs << "Player with the highest international goals: " << highestGoals.get_name() << " (" << highestGoals.get_intgoals() << " goals)" << endl;
+        ofs << "Player with the highest international goals: " << highestGoals.get_name() << "      goals: " << highestGoals.get_intgoals()  << endl;
     }
 
     int AvgIntGoals(){
         int i=0;
         int k=0;
         for (int j = 0; j < 18; ++j) {
-            if (active[j] == true) {
+            if (active[j]) {
                 i++;
             }
         }
@@ -195,7 +193,7 @@ int NationalTeam::i=0;
 ostream& operator <<(ostream&os,NationalTeam& obj){
     os<<"team country: "<<obj.country<<endl;
     for (int i = 0; i < 18; ++i) {
-        if(obj.active[i]== true){
+        if(obj.active[i]){
             os<<"player "<<i+1<<" "<<"info:"<<endl;
             os<<obj.players[i].get_name()<<endl;
         }
@@ -204,16 +202,22 @@ ostream& operator <<(ostream&os,NationalTeam& obj){
     return os;
 }
 int main() {
-Player a("ahmed",2004,180,22,"egyptian");
-    Player b("ahme",2005,180,22,"egyptian");
-    Player c("ramy",2005,180,22,"egyptian");
+Player a("john",2004,177,130,"french");
+    Player b("will",1999,176,230,"french");
+    Player c("sam",1988,180,770,"french");
+    Player d("max",2000,190,188,"french");
+    Player e("stew",1995,188,33,"french");
+    NationalTeam barcelona("spain");
+    barcelona.addPlayer(a);
+    barcelona.addPlayer(b);
+    barcelona.addPlayer(c);
+    barcelona.addPlayer(d);
+    barcelona.addPlayer(e);
+    cout<<barcelona;
+    ofstream of ("statistics.txt");
+    barcelona.writeStatistics(of);
 
-    NationalTeam ahly("egypt");
-    ahly.addPlayer(a);
-    ahly.addPlayer(b);
-    ahly.addPlayer(c);
-ofstream out("out.txt");
-ahly.writeStatistics(out);
+
 
 
 }
