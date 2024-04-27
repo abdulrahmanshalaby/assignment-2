@@ -169,7 +169,6 @@ Player HighestIntGoals(){
         Player highestGoals =HighestIntGoals() ;
         ofs << "Player with the highest international goals: " << highestGoals.get_name() << "      goals: " << highestGoals.get_intgoals()  << endl;
     }
-
     int AvgIntGoals(){
         int i=0;
         int k=0;
@@ -187,7 +186,6 @@ Player HighestIntGoals(){
 
         return k;
     }
-
 };
 int NationalTeam::i=0;
 ostream& operator <<(ostream&os,NationalTeam& obj){
@@ -201,24 +199,33 @@ ostream& operator <<(ostream&os,NationalTeam& obj){
     }
     return os;
 }
+Player* readPlayersFromFile(ifstream& ifs)
+{ int numPlayers;
+
+    ifs>>numPlayers;
+    ifs.ignore();
+    Player players[numPlayers];
+    for (int i = 0; i < numPlayers; ++i) {
+        string name, nationality;
+        int yearOfBirth, height, internationalGoals;
+        getline(ifs, name);
+        ifs >> yearOfBirth >> height >> internationalGoals;
+        ifs.ignore();
+        getline(ifs>>ws, nationality);
+        players[i] = Player(name, yearOfBirth, height, internationalGoals, nationality);
+
+    }
+    return players;
+}
 int main() {
-Player a("john",2004,177,130,"french");
-    Player b("will",1999,176,230,"french");
-    Player c("sam",1988,180,770,"french");
-    Player d("max",2000,190,188,"french");
-    Player e("stew",1995,188,33,"french");
-    NationalTeam barcelona("spain");
-    barcelona.addPlayer(a);
-    barcelona.addPlayer(b);
-    barcelona.addPlayer(c);
-    barcelona.addPlayer(d);
-    barcelona.addPlayer(e);
-    cout<<barcelona;
-    ofstream of ("statistics.txt");
-    barcelona.writeStatistics(of);
-
-
-
-
 
 }
+
+
+
+
+
+
+
+
+

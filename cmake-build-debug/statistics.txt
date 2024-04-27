@@ -3,5 +3,5 @@ Number of players: 5
 Average height of players: 181
 oldest player: sam           Age: 36
 youngest player: john       Age: 20
-Average number of international goals of players: 269
+Average number of international goals of players: 271
 Player with the highest international goals: sam      goals: 770
