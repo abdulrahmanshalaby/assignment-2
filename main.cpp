@@ -10,7 +10,7 @@ class Player{
     int int_goals;
     string nationality;
 public:
-
+// parameterized constructor
     Player(string name="",int yearofbirth=0,int h=0,int ig=0,string nationality=""){
         this->name=name;
         year_of_birth=yearofbirth;
@@ -18,7 +18,7 @@ public:
         int_goals=ig;
         this->nationality=nationality;
     }
-public:
+    //setters
      void set_name(string n){
          name=n;
      }
@@ -34,6 +34,7 @@ public:
     void set_nationality(string n){
         nationality=n;
     }
+    //getters
   string get_name(){
          return name;
      }
@@ -59,7 +60,9 @@ public:
     NationalTeam(string country){
         this->country=country;
     }
+    // adds player to players array and activating corresponding index in active array
 bool addPlayer(const Player&obj){
+        // when array is full returns false (i is a static member)
     if(i>18){
         cout<<"team full"<<endl;
         return false;
@@ -70,6 +73,7 @@ bool addPlayer(const Player&obj){
     i++;
     return true;
 }
+// removes player(S) by their name by deactivating corresponding index in active array
 bool removeplayer(string n){
     bool flag;
     for (int j = 0; j < 18; ++j) {
@@ -153,7 +157,9 @@ Player HighestIntGoals(){
     }
     return players[k];
 }
+// friend function implemented outside class
  friend ostream& operator <<(ostream&os,NationalTeam& obj);
+    // writes analysis report of team in file
     void writeStatistics(ofstream& ofs) {
         ofs << "Team Country: " << country << endl;
         ofs << "Number of players: " << getNumOfPlayers() << endl;
@@ -188,6 +194,7 @@ Player HighestIntGoals(){
     }
 };
 int NationalTeam::i=0;
+// operator << function overloading
 ostream& operator <<(ostream&os,NationalTeam& obj){
     os<<"team country: "<<obj.country<<endl;
     for (int i = 0; i < 18; ++i) {
@@ -199,6 +206,7 @@ ostream& operator <<(ostream&os,NationalTeam& obj){
     }
     return os;
 }
+//global read function returns Player array with info of file
 Player* readPlayersFromFile(ifstream& ifs)
 { int numPlayers;
 
