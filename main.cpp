@@ -63,7 +63,7 @@ public:
     }
     // adds player to players array and activating corresponding index in active array
 bool addPlayer(const Player&obj){
-        // when array is full returns false (i is a static member)
+        // when array is full returns false 
     if(i>18){
         cout<<"team full"<<endl;
         return false;
