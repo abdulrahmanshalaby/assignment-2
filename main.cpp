@@ -26,7 +26,7 @@ public:
         year_of_birth=n;
     }
     void set_intgoals(int n){
-         int_goals-n;
+         int_goals=n;
      }
     void set_height(int n){
         height=n;
@@ -52,11 +52,12 @@ public:
     }
 };
 class NationalTeam{
-    string country;
-    static int i;
+
+    int i=0;
 Player players[18];
 bool active[18]={false};
 public:
+    string country;
     NationalTeam(string country){
         this->country=country;
     }
@@ -193,10 +194,10 @@ Player HighestIntGoals(){
         return k;
     }
 };
-int NationalTeam::i=0;
+
 // operator << function overloading
 ostream& operator <<(ostream&os,NationalTeam& obj){
-    os<<"team country: "<<obj.country<<endl;
+    os<<"team country: "<<" "<<obj.country<<endl;
     for (int i = 0; i < 18; ++i) {
         if(obj.active[i]){
             os<<"player "<<i+1<<" "<<"info:"<<endl;
@@ -207,12 +208,12 @@ ostream& operator <<(ostream&os,NationalTeam& obj){
     return os;
 }
 //global read function returns Player array with info of file
-Player* readPlayersFromFile(ifstream& ifs)
+vector<Player> readPlayersFromFile(ifstream& ifs)
 { int numPlayers;
 
     ifs>>numPlayers;
     ifs.ignore();
-    Player players[numPlayers];
+    vector<Player>players;
     for (int i = 0; i < numPlayers; ++i) {
         string name, nationality;
         int yearOfBirth, height, internationalGoals;
@@ -220,13 +221,64 @@ Player* readPlayersFromFile(ifstream& ifs)
         ifs >> yearOfBirth >> height >> internationalGoals;
         ifs.ignore();
         getline(ifs>>ws, nationality);
-        players[i] = Player(name, yearOfBirth, height, internationalGoals, nationality);
-
+        players.push_back(Player(name, yearOfBirth, height, internationalGoals, nationality));
+cout<<"players available: "<<players[i].get_name()<<endl;
     }
     return players;
 }
 int main() {
+    int n;
+    ifstream read("players.txt");
+    vector<Player>players= readPlayersFromFile(read);
+    cout<< "enter number of teams you want to create:  "<<" "<<endl;
+    cin>>n;
+    vector<NationalTeam> nationalteam;
+    // vector carries all teams created
+    for (int i = 0; i < n; ++i) {
+        cout<<"enter team country: "<<" ";
+       string m;
+       cin>>m;
+       NationalTeam f(m);
+        nationalteam.push_back(f);
 
+    }
+
+    // printing all entred teams
+    cout<<"your teams:  "<<" "<<endl;
+    for (int i = 0; i < n; ++i) {
+        cout<<nationalteam[i].country<<endl;
+    }
+
+    int t;
+    cout<<"how many adds/removes you want to do? "<<endl;
+    cin>>t;
+    for (int i = 0; i < t; ++i) {
+        int f;
+        int r;
+        int d;
+       cout<<"enter 1 for add or 2 for remove. "<<endl;
+        cin>>r;
+        cout<<"choose team number: ";
+        cin>>f;
+        if(r==1){
+            cout<<"choose player number";
+            cin>>d;
+            nationalteam[f-1].addPlayer(players[d-1]);
+        }
+        else{
+            string name;
+            cout<<"enter name of player to remove ";
+            cin>>name;
+            nationalteam[f-1].removeplayer(name);
+        }
+    }
+    for (int i = 0; i <n ; ++i) {
+        cout<<nationalteam[i];
+    }
+    ofstream write("statistics.txt",ios::app);
+    for (int i = 0; i < n; ++i) {
+        nationalteam[i].writeStatistics(write);
+    }
 }
 
 

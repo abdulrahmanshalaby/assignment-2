@@ -1,7 +1,15 @@
-Team Country: spain
-Number of players: 5
-Average height of players: 181
-oldest player: sam           Age: 36
-youngest player: john       Age: 20
-Average number of international goals of players: 271
-Player with the highest international goals: sam      goals: 770
+
+Team Country: masr
+Number of players: 2
+Average height of players: 156
+oldest player: ahmed           Age: 20
+youngest player: ramy       Age: 19
+Average number of international goals of players: 116
+Player with the highest international goals: ahmed      goals: 222
+Team Country: egypt
+Number of players: 1
+Average height of players: 177
+oldest player: wael           Age: 24
+youngest player: wael       Age: 24
+Average number of international goals of players: 333
+Player with the highest international goals: wael      goals: 333
